@@ -15,3 +15,17 @@ function showRandomQoute() {
 
     sessionStorage.setItem("latestViewQoute", randomIndex);
 }
+
+function addQoute(newQoute) {
+    quotes.push(newQoute);
+    localStorage.setItem('qoutes', JSON.stringify(qoutes));
+    showRandomQoute();
+    postQouteToServer(newQoute)
+    .then(()=>{
+        showNotification("Qoute added Successfully!", "success");    
+    })
+
+    .catch(error => {
+        showNotification("error adding Qoute:" + error.message, "error");
+    });
+}
